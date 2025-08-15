@@ -9,7 +9,6 @@ import "./App.css";
 */
 
 function Avatar({ role }) {
-  // simple svg avatars (user vs bot)
   return (
     <div className={`avatar ${role}`}>
       {role === "user" ? (
@@ -45,15 +44,13 @@ function Avatar({ role }) {
 
 export default function App() {
   const [messages, setMessages] = useState([
-    // Example starter message (optional)
-    { role: "bot", text: "Welcome. Ask me anything about the archive.", time: Date.now() },
+    { role: "bot", text: "AIRAC online. Ask me anything about the archive.", time: Date.now() },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const endRef = useRef(null);
 
-  // AUTO SCROLL
   useEffect(() => {
     if (endRef.current) {
       endRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -62,15 +59,13 @@ export default function App() {
 
   // 🔹 Single place to swap in the backend API
   async function getBotResponse(userMessage) {
-    // -------------------------
     // Temporary MOCK (for dev & styling)
-    // -------------------------
     return new Promise((resolve) => {
       setTimeout(() => {
-        // reply in the JSON shape backend will use
         resolve({ response: `mock reply to: "${userMessage}"` });
       }, 900);
     });
+
 
     // -------------------------
     // LATER: Replace above with real fetch:
@@ -114,18 +109,13 @@ export default function App() {
     setLoading(true);
 
     try {
-      // get JSON back from getBotResponse (mock or real)
       const json = await getBotResponse(trimmed);
-
-      // parse the JSON -> extract the actual response text
-      // (Adapt here if backend returns nested objects, e.g. data.output[0].text)
       const botText = (json && (json.response || json.text || json.output)) ?? "No response";
-
       const botMsg = { role: "bot", text: botText, time: Date.now() };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error("Chat error:", err);
-      setErrorMsg("Could not reach the bot. Try again later.");
+      setErrorMsg("Could not reach AIRAC. Try again later.");
       const errMsg = { role: "bot", text: "⚠️ Error: failed to fetch response.", time: Date.now() };
       setMessages((prev) => [...prev, errMsg]);
     } finally {
@@ -140,12 +130,10 @@ export default function App() {
     }
   };
 
-  // timestamp formatter
   const fmt = (t) => new Date(t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="app-root">
-      {/* Sci-fi decorative SVGs in the background */}
       <svg className="bg-dna" viewBox="0 0 600 600" aria-hidden>
         <defs>
           <linearGradient id="dnaGrad" x1="0" x2="1">
@@ -163,7 +151,6 @@ export default function App() {
         <header className="chat-header">
           <div className="title">
             <div className="logo-hex" aria-hidden>
-              {/* small hexagon/neural icon */}
               <svg viewBox="0 0 100 100" width="36" height="36">
                 <polygon points="50,6 86,25 86,69 50,88 14,69 14,25" fill="#0ea5a6" opacity="0.95" />
                 <circle cx="50" cy="50" r="10" fill="#06113c" opacity="0.9" />
@@ -197,7 +184,7 @@ export default function App() {
                   <span className="dot" />
                   <span className="dot" />
                 </div>
-                <div className="bubble-text sr-only">Assistant is typing...</div>
+                <div className="bubble-text sr-only">AIRAC is typing...</div>
               </div>
             </div>
           )}
@@ -215,9 +202,6 @@ export default function App() {
           />
 
           <div className="actions">
-            <button className="btn ghost" onClick={() => { setInput(""); }}>
-              Clear
-            </button>
             <button className="btn primary" onClick={sendMessage} disabled={loading}>
               {loading ? "Sending..." : "Send"}
             </button>
@@ -227,7 +211,6 @@ export default function App() {
         {errorMsg && <div className="error-line">{errorMsg}</div>}
       </main>
 
-      {/* small floating neural motif */}
       <svg className="bg-brain" viewBox="0 0 200 200" aria-hidden>
         <defs>
           <linearGradient id="b1" x1="0" x2="1">

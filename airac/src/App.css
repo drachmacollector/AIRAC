@@ -57,10 +57,7 @@ body{
 }
 .title{display:flex; gap:12px; align-items:center;}
 .logo-hex{ width:48px; height:48px; display:flex; align-items:center; justify-content:center; }
-.title-main{ font-weight:600; font-size:1.05rem; color: #e8f1ff; }
-.title-sub{ font-size:0.78rem; color:var(--muted); margin-top:2px; }
-
-.header-right{ display:flex; gap:8px; align-items:center; }
+.title-main{ font-weight:700; font-size:1.05rem; color: #e8f1ff; }
 
 /* window with messages */
 .chat-window{
@@ -79,6 +76,7 @@ body{
   gap:12px;
   align-items:flex-end;
   max-width:100%;
+  width:100%;
   margin-bottom:6px;
 }
 .row-user{justify-content:flex-end; flex-direction:row-reverse;}
@@ -99,7 +97,13 @@ body{
   box-shadow: 0 6px 18px rgba(3,8,23,0.45);
   color: #e6eef8;
   border: 1px solid rgba(255,255,255,0.03);
+  display:inline-block;
 }
+
+/* align user/bot bubbles explicitly */
+.row-user .bubble { margin-left: auto; margin-right: 12px; }
+.row-bot .bubble  { margin-right: auto; margin-left: 12px; }
+
 .bubble.user{
   background: linear-gradient(180deg, rgba(11,91,215,0.95), rgba(10,83,200,0.95));
   color: white;
